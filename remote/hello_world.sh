@@ -8,5 +8,5 @@ echo "Argument 1: $1"
 echo "Argument 2: $2"
 shift 2
 echo "Other: $*"
-# Is this executed on the remote machine?
+# Who did execute this?
 echo "$USER"
