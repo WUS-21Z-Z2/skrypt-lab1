@@ -1,0 +1,2 @@
+# Skrypt lab1
+
