@@ -10,3 +10,4 @@ shift 2
 echo "Other: $*"
 # Who did execute this?
 echo "$USER"
+echo $(pwd)

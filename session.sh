@@ -13,7 +13,7 @@ project=$1
 zone=$2
 machine=$3
 shift 3
-cmd="./remote/$1.sh"
+cmd="./remote_scripts/$1.sh"
 shift
 args=$*
 # Print the command that will get executed, useful for manual testing
