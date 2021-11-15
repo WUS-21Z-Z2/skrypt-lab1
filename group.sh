@@ -67,7 +67,7 @@ set "${setups[@]}"
 # Start a session for each setup
 while (($# > 0))
 do
-    ./session.sh $1 $2 $3 $4 $5
+    ./run_remotely.sh $1 $2 $3 $4 $5
     shift 5
 done
 

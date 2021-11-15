@@ -15,6 +15,7 @@ zone=$2
 machine=$3
 script=$4
 shift 4
+args=$*
 
 gcloud beta compute scp --project=$project --zone=$zone --recurse './remote_scripts' $machine:'~/.remote_scripts'
 if (($? > 0)); then
@@ -22,7 +23,7 @@ if (($? > 0)); then
     exit 1
 fi
 
-gcloud beta compute ssh --project=$project --zone=$zone $machine --command="bash ~/.remote_scripts/$script.sh $*"
+gcloud beta compute ssh --project=$project --zone=$zone $machine --command="bash ~/.remote_scripts/$script.sh $args"
 if (($? > 0)); then
     echo "Failed to connect to '$project/$zone/$machine' during phase 2. './.remote_scripts' was not deleted."
     exit 2
