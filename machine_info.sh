@@ -38,6 +38,7 @@ get_machines () {
     # Fill the array
     declare -n m="$array"
     unset IFS
+    m[count]=$#
     for i in $(seq 1 $#)
     do
         m[$i,name]=${1:$name_start:$name_length}
@@ -67,3 +68,4 @@ echo ${machines["3,name"]}
 echo ${machines["$i,status"]}
 echo ${machines["2,internal_ip"]}
 echo ${machines["3,zone"]}
+echo ${machines[count]}
