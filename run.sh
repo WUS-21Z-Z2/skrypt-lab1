@@ -17,8 +17,8 @@ fi
 
 #while [[ $# > 0 ]]
 #do
-	project=$1
-	flag=$2
+	flag=$1
+	project=$2
 	shift 2
 	case $flag in
 		1) ./configs/1.sh $project $*;;
