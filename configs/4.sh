@@ -27,6 +27,7 @@ db_slave_hostname=${machines["$machine2,internal_ip"]}
 api_post_hostname=${machines["$machine3,internal_ip"]}
 api_get_hostname=${machines["$machine4,internal_ip"]}
 api_hostname=${machines["$machine5,external_ip"]}
+angular_hostname=${machines["$machine6,external_ip"]}
 
 
 echo "Configuration 1 starting."
@@ -48,3 +49,5 @@ config_machine $machine5 nginx-load-balancer $api_port $api_get_hostname $api_ge
 
 # Machine 6 - Angular
 config_machine $machine6 spring-petclinic-angular $angular_port $api_hostname $api_port
+
+echo "Configuration 4 ready: http://$angular_hostname:$angular_port/petclinic"

@@ -3,15 +3,16 @@
 # Chooses the configuration and passes arguments along
 
 # Args:
-# $1    gcloud project
-# $2    configuration numbers
+# $1    configuration numbers
+# $2    gcloud project
 # $3+   arguments for the configuration
 
 source machine_info.sh;
 
 if [[ $# -le 1 ]]
 then
-	echo 'Not enough arguments given!';
+	echo 'Not enough arguments given!' >&2
+	echo "Usage: $0 configuration project_name options..." >&2
 	exit 1
 fi
 

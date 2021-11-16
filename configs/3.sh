@@ -21,6 +21,7 @@ angular_port=${arg_array[7]}
 db_master_hostname=${machines["$machine1,internal_ip"]}
 db_slave_hostname=${machines["$machine2,internal_ip"]}
 api_hostname=${machines["$machine3,external_ip"]}
+angular_hostname=${machines["$machine4,external_ip"]}
 
 
 echo "Configuration 1 starting."
@@ -36,3 +37,5 @@ config_machine $machine3 spring-petclinic-rest-write $api_port $db_master_hostna
 
 # Machine 4 - Angular
 config_machine $machine4 spring-petclinic-angular $angular_port $api_hostname $api_port
+
+echo "Configuration 3 ready: http://$angular_hostname:$angular_port/petclinic"

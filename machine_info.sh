@@ -75,5 +75,6 @@ function config_machine()
 	script=$2
 	shift 2
 	echo "./run_remotely.sh" "$project" "${machines["$machine,zone"]}" "${machines["$machine,name"]}" "$script" "$*"
-	./run_remotely.sh "$project" "${machines["$machine,zone"]}" "${machines["$machine,name"]}" "$script" "$*"
+	./run_remotely.sh "$project" "${machines["$machine,zone"]}" "${machines["$machine,name"]}" "$script" "$*" \
+        || exit $?
 }

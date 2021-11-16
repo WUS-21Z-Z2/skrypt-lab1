@@ -17,25 +17,21 @@ script=$4
 shift 4
 args=$*
 
-gcloud beta compute ssh --ssh-flag="-o ConnectTimeout=30" --ssh-flag="-o BatchMode=yes" --ssh-flag="-o StrictHostKeyChecking=no" --project=$project --zone=$zone $machine --command='rm -f -r ~/.remote_scripts'
+
+gcloud beta compute scp --scp-flag="-o ConnectTimeout=30" --scp-flag="-o BatchMode=yes" --scp-flag="-o StrictHostKeyChecking=no" --project=$project --zone=$zone ./remote_scripts/*.sh $machine:'~/.remote_scripts'
 if (($? > 0)); then
-    echo "Failed to connect to '$project/$zone/$machine' during phase 1. '~/.remote_scripts' could not delete."
+    echo "Failed to connect to '$project/$zone/$machine' during phase 1. Nothing needs cleanup."
     exit 1
 fi
 echo "Step 1 completed for '$project/$zone/$machine'"
 
-gcloud beta compute scp --scp-flag="-o ConnectTimeout=30" --scp-flag="-o BatchMode=yes" --scp-flag="-o StrictHostKeyChecking=no" --project=$project --zone=$zone --recurse './remote_scripts' $machine:'~/.remote_scripts'
-if (($? > 0)); then
-    echo "Failed to connect to '$project/$zone/$machine' during phase 2. Nothing needs cleanup."
-    exit 2
-fi
-echo "Step 2 completed for '$project/$zone/$machine'"
+sleep 2
 
 gcloud beta compute ssh --ssh-flag="-o ConnectTimeout=30" --ssh-flag="-o BatchMode=yes" --ssh-flag="-o StrictHostKeyChecking=no" --project=$project --zone=$zone $machine --command="cd ~/.remote_scripts && sudo bash ./$script.sh $args"
 if (($? > 0)); then
-    echo "Failed to connect to '$project/$zone/$machine' during phase 3. '~/.remote_scripts' was not deleted."
-    exit 3
+    echo "Failed to connect to '$project/$zone/$machine' during phase 2. '~/.remote_scripts' was not deleted."
+    exit 2
 fi
-echo "Step 3 completed for '$project/$zone/$machine'"
+echo "Step 2 completed for '$project/$zone/$machine'"
 
 exit 0
