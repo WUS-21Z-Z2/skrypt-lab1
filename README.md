@@ -14,6 +14,7 @@ Przykłady uruchomienia każdej konfiguracji i czyszczenia są dostępne w swoic
 - `clean.sh`
 
 Kilka szczegółów implementacji:
-- maszyny pobierane są z chmury za pomocą nazwy projektu, wybierane są poprzez podanie indeksu zaczynając od 1
-- skrypty z katalogu `remote_scripts` są przesyłane na maszynę, gdzie jeden z nich zostanie uruchomiony z parametrami
+- indywidualne konfiguracje mają swoje własne skrypty, które przyjmują różne argumenty (folder `configs`)
+- maszyny pobierane są z chmury za pomocą nazwy projektu, wybierane są poprzez podanie indeksu zaczynając od 1 (skrypt `machine_info.sh`)
+- skrypty z katalogu `remote_scripts` są przesyłane na maszynę, gdzie jeden z nich zostanie uruchomiony z parametrami (skrypt `run_remotely.sh`)
 - skrypty są przesyłane w ramach każdego obrazu konfiguracji
