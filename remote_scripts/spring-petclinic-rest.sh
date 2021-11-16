@@ -1,8 +1,32 @@
 #!/bin/bash
-port=$1
-database_hostname=$2
-database_port=$3
+source ./images-list.sh
 
-sudo docker rmi dove6/spring-petclinic-rest-mysql:latest
-petclinic_rest_id=$(sudo docker run --rm -d -p $port:9966 dove6/spring-petclinic-rest-mysql:latest "--spring.datasource.url=jdbc:mysql://$database_hostname:$database_port/petclinic?useUnicode=true")
-echo "Started container $petclinic_rest_id using port $port"
+CONTAINER_NAME="spring-petclinic-rest"
+IMAGE_NAME="${IMAGES[$CONTAINER_NAME]}"
+
+if [[ "$#" -ne 5 ]]
+then
+    echo "Usage: $0 port masterdb_hostname masterdb_port slavedb_hostname slavedb_port" >&2
+    exit 1
+fi
+
+port=$1
+masterdb_hostname=$2
+masterdb_port=$3
+slavedb_hostname=$4
+slavedb_port=$5
+
+if [[ "$slavedb_hostname" == "-" ]] && [[ "$slavedb_port" == "-" ]]
+then
+    datasource_url="jdbc:mysql://$masterdb_hostname:$masterdb_port/petclinic?useUnicode=true"
+else
+    datasource_url="jdbc:mysql:replication://$masterdb_hostname:$masterdb_port,$slavedb_hostname:$slavedb_port/petclinic?useUnicode=true"
+fi
+
+docker stop "$CONTAINER_NAME" >/dev/null 2>&1
+docker run --rm -d --add-host=host.docker.internal:host-gateway \
+        --name "$CONTAINER_NAME" \
+        -p $port:9966 \
+        "$IMAGE_NAME" "--spring.datasource.url=$datasource_url" >/dev/null \
+    && echo "Started container $CONTAINER_NAME using port $port" \
+    || { echo "Error starting container $CONTAINER_NAME using port $port"; exit 1; }
