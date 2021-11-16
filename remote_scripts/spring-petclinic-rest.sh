@@ -24,7 +24,7 @@ else
 fi
 
 docker stop "$CONTAINER_NAME" >/dev/null 2>&1
-docker run --rm -d --add-host=host.docker.internal:host-gateway \
+docker run -d --add-host=host.docker.internal:host-gateway \
         --name "$CONTAINER_NAME" \
         -p $port:9966 \
         "$IMAGE_NAME" "--spring.datasource.url=$datasource_url" >/dev/null \

@@ -10,8 +10,8 @@ MYSQL_USER="pc"
 MYSQL_PASSWORD="petclinic"
 MYSQL_DATABASE="petclinic"
 
-DB_SCHEMA_URL="https://raw.githubusercontent.com/spring-petclinic/spring-petclinic-rest/master/src/main/resources/db/mysql/initDB.sql"
-DB_DATA_URL="https://raw.githubusercontent.com/spring-petclinic/spring-petclinic-rest/master/src/main/resources/db/mysql/populateDB.sql"
+DB_SCHEMA_URL="https://raw.githubusercontent.com/spring-petclinic/spring-petclinic-rest/29287912f1976ec01fc364e99a5798d6d8a3d6c7/src/main/resources/db/mysql/initDB.sql"
+DB_DATA_URL="https://raw.githubusercontent.com/spring-petclinic/spring-petclinic-rest/29287912f1976ec01fc364e99a5798d6d8a3d6c7/src/main/resources/db/mysql/populateDB.sql"
 
 if [[ "$#" -ne 1 ]]; then
     echo "Usage: $0 port" >&2
@@ -21,7 +21,7 @@ fi
 port=$1
 
 docker stop "$CONTAINER_NAME" >/dev/null 2>&1
-docker run --rm -d --add-host=host.docker.internal:host-gateway \
+docker run -d --add-host=host.docker.internal:host-gateway \
         --name "$CONTAINER_NAME" \
         -p $port:3306 \
         -e MYSQL_ROOT_PASSWORD="$MYSQL_ROOT_PASSWORD" \

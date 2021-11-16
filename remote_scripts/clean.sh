@@ -3,7 +3,7 @@ source ./images-list.sh
 
 for key in "${!IMAGES[@]}"
 do
-    docker stop "$key" 2>/dev/null
+    docker rm -f "$key" 2>/dev/null
     docker rmi -f "${IMAGES[$key]}" 2>/dev/null
 done
 

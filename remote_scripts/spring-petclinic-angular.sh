@@ -14,7 +14,7 @@ api_hostname=$2
 api_port=$3
 
 docker stop "$CONTAINER_NAME" >/dev/null 2>&1
-docker run --rm -d --add-host=host.docker.internal:host-gateway \
+docker run -d --add-host=host.docker.internal:host-gateway \
         --name "$CONTAINER_NAME" \
         -p $port:8080 \
         -e REST_API_HOSTNAME=$api_hostname \

@@ -17,7 +17,7 @@ proxy_other_hostname=$4
 proxy_other_port=$5
 
 docker stop "$CONTAINER_NAME" >/dev/null 2>&1
-docker run --rm -d --add-host=host.docker.internal:host-gateway \
+docker run -d --add-host=host.docker.internal:host-gateway \
         --name "$CONTAINER_NAME" \
         -p $port:80 \
         -e REST_API_READ_HOSTNAME=$proxy_get_hostname \
