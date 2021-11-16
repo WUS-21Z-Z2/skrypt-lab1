@@ -16,7 +16,7 @@ echo "Cleaning started."
 for i in $(seq 1 ${machines[count]})
 do
     echo "Cleaning machine $i started."
-    config_machine $i clean
+    config_machine $project $i clean
     echo "Cleaning machine $i done."
 done
 

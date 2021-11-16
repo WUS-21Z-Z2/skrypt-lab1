@@ -12,7 +12,7 @@ source machine_info.sh;
 if [[ $# -le 1 ]]
 then
 	echo 'Not enough arguments given!' >&2
-	echo "Usage: $0 configuration project_name options..." >&2
+	echo "Usage: $0 configuration project_name [options...]" >&2
 	exit 1
 fi
 

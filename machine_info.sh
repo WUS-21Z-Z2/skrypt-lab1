@@ -71,9 +71,10 @@ get_machines () {
 
 function config_machine()
 {
-	machine=$1
-	script=$2
-	shift 2
+	project=$1
+	machine=$2
+	script=$3
+	shift 3
 	echo "./run_remotely.sh" "$project" "${machines["$machine,zone"]}" "${machines["$machine,name"]}" "$script" "$*"
 	./run_remotely.sh "$project" "${machines["$machine,zone"]}" "${machines["$machine,name"]}" "$script" "$*" \
         || exit $?
