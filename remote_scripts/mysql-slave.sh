@@ -54,7 +54,7 @@ else
 fi
 master_file=$(echo "$master_data" | grep File | sed 's/^.*File: \([a-z0-9.-]\+\).*$/\1/igm')
 master_position=$(echo "$master_data" | grep Position | sed 's/^.*Position: \([0-9]\+\).*$/\1/igm')
-echo "CHANGE MASTER TO MASTER_HOST='$master_hostname', MASTER_USER='root', MASTER_PASSWORD='$MYSQL_ROOT_PASSWORD', MASTER_LOG_FILE='$master_file', MASTER_LOG_POS=$master_position; START SLAVE;" \
+echo "CHANGE MASTER TO MASTER_HOST='$master_hostname', MASTER_PORT=$master_port, MASTER_USER='root', MASTER_PASSWORD='$MYSQL_ROOT_PASSWORD', MASTER_LOG_FILE='$master_file', MASTER_LOG_POS=$master_position; START SLAVE;" \
     | docker exec -i "$CONTAINER_NAME" sh -c 'exec mysql -uroot -p"$MYSQL_ROOT_PASSWORD" "$MYSQL_DATABASE"'
 echo "GRANT REPLICATION CLIENT ON *.* TO '$MYSQL_USER'@'%' IDENTIFIED BY '$MYSQL_PASSWORD'; FLUSH PRIVILEGES;" \
     | docker exec -i "$CONTAINER_NAME" sh -c 'exec mysql -uroot -p"$MYSQL_ROOT_PASSWORD" "$MYSQL_DATABASE"'
