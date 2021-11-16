@@ -33,7 +33,7 @@ get_machines () {
     internal_ip_length=$(($external_ip_start - $internal_ip_start))
     status_start=${header%%STATUS*}
     status_start=${#status_start}
-    external_ip_length=$(($status_start - $internal_ip_start))
+    external_ip_length=$(($status_start - $external_ip_start))
 
     # Fill the array
     declare -n m="$array"
@@ -41,31 +41,29 @@ get_machines () {
     m[count]=$#
     for i in $(seq 1 $#)
     do
-        m[$i,name]=${1:$name_start:$name_length}
-        m[$i,zone]=${1:$zone_start:$zone_length}
-        m[$i,machine_type]=${1:$machine_type_start:$machine_type_length}
-        m[$i,preemptible]=${1:$preemptible_start:$preemptible_length}
-        m[$i,internal_ip]=${1:$internal_ip_start:$internal_ip_length}
-        m[$i,external_ip]=${1:$external_ip_start:$external_ip_length}
-        m[$i,status]=${1:$status_start}
+        m[$i,name]=$(sed 's/ //g' <<< ${1:$name_start:$name_length})
+        m[$i,zone]=$(sed 's/ //g' <<< ${1:$zone_start:$zone_length})
+        m[$i,machine_type]=$(sed 's/ //g' <<< ${1:$machine_type_start:$machine_type_length})
+        m[$i,preemptible]=$(sed 's/ //g' <<< ${1:$preemptible_start:$preemptible_length})
+        m[$i,internal_ip]=$(sed 's/ //g' <<<${1:$internal_ip_start:$internal_ip_length})
+        m[$i,external_ip]=$(sed 's/ //g' <<<${1:$external_ip_start:$external_ip_length})
+        m[$i,status]=$(sed 's/ //g' <<<${1:$status_start})
         shift
     done
 }
 
-exit 0
-
 # Examples
 
 # Call
-declare -A machines
-get_machines "heroic-oarlock-329616" machines
+#declare -A machines
+#get_machines "heroic-oarlock-329616" machines
 
 # Get values
-i=1
-echo ${machines["1,name"]}
-echo ${machines["2,name"]}
-echo ${machines["3,name"]}
-echo ${machines["$i,status"]}
-echo ${machines["2,internal_ip"]}
-echo ${machines["3,zone"]}
-echo ${machines[count]}
+#i=1
+#echo ${machines["$i,name"]}
+#echo ${machines["2,name"]}
+#echo ${machines["3,name"]}
+#echo ${machines["$i,status"]}
+#echo ${machines["2,internal_ip"]}
+#echo ${machines["3,zone"]}
+#echo ${machines[count]}
