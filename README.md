@@ -3,8 +3,8 @@
 W projekcie wykorzystujemy powłokę bash oraz narzędzie gcloud.
 
 Głównym wejściem programu jest skrypt `run.sh`, która za argumenty przyjmuje:
-- nazwę projektu na serwisie google cloud,
 - numer konfiguracji (1, 3, 4) lub polecenie `clean`,
+- nazwę projektu na serwisie google cloud,
 - argumenty specyficzne dla danych konfiguracji,
 
 Przykłady uruchomienia każdej konfiguracji i czyszczenia są dostępne w swoich własnych skryptach:

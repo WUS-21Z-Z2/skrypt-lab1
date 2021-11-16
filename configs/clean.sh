@@ -10,14 +10,6 @@ get_machines $1 machines;
 project=$1
 shift
 
-function config_machine()
-{
-	machine=$1
-	script=$2
-	shift 2
-	echo "./run_remotely.sh" "$project" "${machines["$machine,zone"]}" "${machines["$machine,name"]}" "$script" "$*"
-	./run_remotely.sh "$project" "${machines["$machine,zone"]}" "${machines["$machine,name"]}" "$script" "$*"
-}
 
 echo "Cleaning started."
 

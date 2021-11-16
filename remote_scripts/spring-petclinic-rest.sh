@@ -1,12 +1,11 @@
 #!/bin/bash
 source ./images-list.sh
 
-CONTAINER_NAME="spring-petclinic-rest"
 IMAGE_NAME="${IMAGES[$CONTAINER_NAME]}"
 
-if [[ "$#" -ne 5 ]]
+if [[ "$#" -ne 3 ]] && [[ "$#" -ne 5 ]]
 then
-    echo "Usage: $0 port masterdb_hostname masterdb_port slavedb_hostname slavedb_port" >&2
+    echo "Usage: $0 port masterdb_hostname masterdb_port [slavedb_hostname slavedb_port]" >&2
     exit 1
 fi
 
@@ -16,7 +15,7 @@ masterdb_port=$3
 slavedb_hostname=$4
 slavedb_port=$5
 
-if [[ "$slavedb_hostname" == "-" ]] && [[ "$slavedb_port" == "-" ]]
+if [[ "$#" -eq 3 ]]
 then
     datasource_url="jdbc:mysql://$masterdb_hostname:$masterdb_port/petclinic?useUnicode=true"
 else

@@ -67,3 +67,13 @@ get_machines () {
 #echo ${machines["2,internal_ip"]}
 #echo ${machines["3,zone"]}
 #echo ${machines[count]}
+
+
+function config_machine()
+{
+	machine=$1
+	script=$2
+	shift 2
+	echo "./run_remotely.sh" "$project" "${machines["$machine,zone"]}" "${machines["$machine,name"]}" "$script" "$*"
+	./run_remotely.sh "$project" "${machines["$machine,zone"]}" "${machines["$machine,name"]}" "$script" "$*"
+}

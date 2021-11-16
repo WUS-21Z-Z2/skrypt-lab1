@@ -20,22 +20,13 @@ db_hostname=${machines["$machine1,internal_ip"]}
 api_hostname=${machines["$machine2,external_ip"]}
 
 
-function config_machine()
-{
-	machine=$1
-	script=$2
-	shift 2
-	echo "./run_remotely.sh" "$project" "${machines["$machine,zone"]}" "${machines["$machine,name"]}" "$script" "$*"
-	./run_remotely.sh "$project" "${machines["$machine,zone"]}" "${machines["$machine,name"]}" "$script" "$*"
-}
-
 echo "Configuration 1 starting."
 
 # Machine 1 - mySQL
 config_machine $machine1 mysql-master $db_port
 
 # Machine 2 - REST
-config_machine $machine2 spring-petclinic-rest $api_port $db_hostname $db_port - -
+config_machine $machine2 spring-petclinic-rest-write $api_port $db_hostname $db_port
 
 # Machine 3 - Angular
 config_machine $machine3 spring-petclinic-angular $angular_port $api_hostname $api_port
