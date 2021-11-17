@@ -37,3 +37,5 @@ config_machine $project $machine2 spring-petclinic-rest-write $api_port $db_host
 config_machine $project $machine3 spring-petclinic-angular $angular_port $api_hostname $api_port
 
 echo "Configuration 1 ready: http://$angular_hostname:$angular_port/petclinic"
+
+./configs/test.sh $angular_hostname $angular_port $api_hostname $api_port

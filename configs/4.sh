@@ -56,3 +56,5 @@ config_machine $project $machine5 nginx-load-balancer $api_port $api_get_hostnam
 config_machine $project $machine6 spring-petclinic-angular $angular_port $api_hostname $api_port
 
 echo "Configuration 4 ready: http://$angular_hostname:$angular_port/petclinic"
+
+./configs/test.sh $angular_hostname $angular_port $api_hostname $api_port
