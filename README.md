@@ -20,6 +20,7 @@ Kilka szczegółów implementacji:
 - skrypty z katalogu `remote_scripts` są przesyłane na maszynę, gdzie następnie jeden z nich jest uruchamiany z odpowiednimi parametrami (skrypt `run_remotely.sh`)
 - skrypty są przesyłane w ramach każdego obrazu konfiguracji
 - skrypty powinny być przesyłane z platformy uniksowej, aby uniknąć problemów z sekwencją zakończenia linii
+- po wdrożeniu każdej konfiguracji uruchamiane są podstawowe testy front-endu i REST API
 
 Wykorzystywane w konfiguracji obrazy pobierane są z witryny dockerhub, gdzie trafiły po zbudowaniu ich na podstawie dostępnych w pozostałych repozytoriach grupy źródeł.
 
