@@ -4,7 +4,7 @@
 get_machines () {
     # Pull the information
     local IFS=""
-    mapfile -t args <<< "$(gcloud compute instances list --project $1)"
+    mapfile -t args <<< "$(gcloud compute instances list --project $1 --sort-by=NAME)"
     if (($? > 0)); then
         echo "Failed to pull information about the project."
         exit 1
