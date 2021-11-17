@@ -18,7 +18,7 @@ shift 4
 args=$*
 
 
-gcloud beta compute scp --scp-flag="-o ConnectTimeout=30" --scp-flag="-o BatchMode=yes" --scp-flag="-o StrictHostKeyChecking=no" --project=$project --zone=$zone ./remote_scripts/*.sh $machine:'~/.remote_scripts'
+gcloud beta compute scp --scp-flag="-o ConnectTimeout=30" --scp-flag="-o BatchMode=yes" --scp-flag="-o StrictHostKeyChecking=no" --project=$project --zone=$zone --recurse './.remote_scripts' $machine:'~/'
 if (($? > 0)); then
     echo "Failed to connect to '$project/$zone/$machine' during phase 1. Nothing needs cleanup."
     exit 1
